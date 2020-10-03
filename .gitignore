@@ -8,6 +8,8 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+carrotSuperSchema_yeonuk.sql
+carrot_super_schema_v0.1.sql
 
 # macOS
 .DS_Store
