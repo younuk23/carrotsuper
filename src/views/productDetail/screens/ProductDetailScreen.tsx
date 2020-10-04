@@ -1,39 +1,79 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { ScrollView } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
-import {
-  ProfileBar,
-  BottomBar,
-  TopBar,
-  MainContent,
-} from "../../../components/productDetail";
+import { useDispatch } from "react-redux";
+import { ProfileBar, BottomBar, TopBar } from "~/components/productDetail";
+import { fetchUserSales } from "~/modules/productDetail/thunk";
+import { useGetDetailData, useGetUserSales } from "~/hooks/useGetData";
+import MainContent from "./MainContent";
+import UserSalesList from "./UserSalesList";
 
-export function ProductDetailScreen() {
+interface PropsItem {
+  navigation: any;
+}
+
+export const ProductDetailScreen: React.FC<PropsItem> = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const userSales = useGetUserSales();
+  const detailData = useGetDetailData();
+
+  const {
+    Product_images,
+    title,
+    price,
+    description,
+    view,
+    like_count,
+    Category,
+    user_id,
+    User,
+  } = detailData;
+
+  useEffect(() => {
+    setUserSales(user_id);
+  }, []);
+
+  const setUserSales = (userId: number) => {
+    dispatch(fetchUserSales(user_id || 1));
+  };
+
+  const newImgSrc = Product_images.map((item: { image_url: string }) => {
+    return item.image_url;
+  });
+
   return (
     <>
-      <StatusBar style="inverted" />
-      <TopBar />
+      <StatusBar style="auto" />
+      <TopBar navigation={navigation} />
       <ScrollView>
         <SliderBox
-          images={IMAGE_URL}
+          images={newImgSrc || []}
           sliderBoxHeight={400}
           dotColor="#fff"
           inactiveDotColor="#efefef"
           circleLoop
           loop
         />
-        <ProfileBar />
-        <MainContent />
+        <View style={styles.container}>
+          <ProfileBar User={User} />
+          <MainContent
+            title={title}
+            description={description}
+            category={Category.name || "기타중고상품"}
+            view={view}
+            likeCount={like_count}
+          />
+          <UserSalesList data={userSales} navigation={navigation} />
+        </View>
       </ScrollView>
-      <BottomBar />
+      <BottomBar price={price} />
     </>
   );
-}
+};
 
-const IMAGE_URL = [
-  `https://dnvefa72aowie.cloudfront.net/origin/article/202010/779D09DCF02D4E946BB24D02A937117A3BDF262480D3F6A314D371698516C8CA.jpg?q=95&s=1440x1440&t=inside`,
-  `https://dnvefa72aowie.cloudfront.net/origin/article/202010/1D13683B5870D369F6F27629EA1332F6E276ED1CFF55E6BCBD4AD089269A937B.jpg?q=95&s=1440x1440&t=inside`,
-  `https://dnvefa72aowie.cloudfront.net/origin/article/202010/779D09DCF02D4E946BB24D02A937117A3BDF262480D3F6A314D371698516C8CA.jpg?q=95&s=1440x1440&t=inside`,
-  `https://dnvefa72aowie.cloudfront.net/origin/article/202010/1D13683B5870D369F6F27629EA1332F6E276ED1CFF55E6BCBD4AD089269A937B.jpg?q=95&s=1440x1440&t=inside`,
-];
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 14,
+  },
+});

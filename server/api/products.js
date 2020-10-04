@@ -3,6 +3,7 @@ const ProductService = require("../service/products.service");
 
 class ProductController {
   router = express.Router();
+  path = "/products";
 
   constructor() {
     this.service = new ProductService();
@@ -10,7 +11,7 @@ class ProductController {
   }
 
   initializeRoutes() {
-    this.router.post("/", this.sendProductList);
+    this.router.post(`${this.path}`, this.sendProductList);
   }
 
   sendProductList = async (req, res) => {

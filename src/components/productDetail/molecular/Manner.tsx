@@ -1,13 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { typo } from "../../../styles";
+import { typo } from "~/styles";
 
-export function Manner() {
+interface Props {
+  manner: number;
+}
+
+const Manner: React.FC<Props> = ({ manner }) => {
   return (
     <View>
       <View style={styles.iconContainer}>
-        <Text style={typo.mannerNormal}>36.5</Text>
+        <Text style={typo.mannerNormal}>{manner}</Text>
         <View style={{ marginLeft: 10 }}>
           <FontAwesome5 name="smile" size={24} color="#319E45" />
         </View>
@@ -15,7 +19,8 @@ export function Manner() {
       <Text style={styles.text}>매너온도</Text>
     </View>
   );
-}
+};
+export default Manner;
 
 const styles = StyleSheet.create({
   iconContainer: {

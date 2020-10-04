@@ -3,6 +3,7 @@ const LoginService = require("../service/login.service");
 
 class LoginController {
   router = express.Router();
+  path = "/login";
 
   constructor() {
     this.service = new LoginService();
@@ -10,7 +11,7 @@ class LoginController {
   }
 
   initializeRoutes() {
-    this.router.post("/", this.login);
+    this.router.post(`${this.path}`, this.login);
   }
 
   login = async (req, res) => {

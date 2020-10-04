@@ -2,11 +2,11 @@ import React from "react";
 import { Feather, Ionicons, Entypo } from "@expo/vector-icons";
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-export function TopBar() {
+export function TopBar({ navigation }: any) {
   return (
     <SafeAreaView style={styles.topContainer}>
       <View style={styles.topbar}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="md-arrow-back" size={24} color="black" />
         </TouchableOpacity>
         <View style={styles.center}>

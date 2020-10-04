@@ -1,9 +1,12 @@
 const { products, product_images, categories, users } = require("../models");
 
-class ProductService {
-  getProductList = async (offset = 0, limit = 10) => {
+class UserSalesService {
+  getProducts = async (userId = 1) => {
     const productList = await products.findAll({
-      attributes: [`id`, `title`, `price`, `view`, `like_count`],
+      attributes: [`id`, `title`, `price`, `user_id`, `view`, `like_count`],
+      where: {
+        user_id: Number(userId),
+      },
       include: [
         {
           model: product_images,
@@ -13,14 +16,12 @@ class ProductService {
         { model: categories, attributes: ["name"] },
         {
           model: users,
-          attributes: ["address"],
+          attributes: ["address", "name"],
         },
       ],
-      offset: Number(offset),
-      limit: Number(limit),
     });
     return productList;
   };
 }
 
-module.exports = ProductService;
+module.exports = UserSalesService;
