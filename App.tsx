@@ -4,14 +4,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Header } from "~/components/productList";
 import { ProductListScreen } from "~/views/productList";
 import { ProductDetailScreen } from "~/views/productDetail";
-
+import { Login } from "~/views/login";
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {/* <Stack.Screen
+      <Stack.Navigator initialRouteName="login">
+        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen
           name="productList"
           component={ProductListScreen}
           options={{
@@ -21,7 +22,7 @@ export default function App() {
               flex: 1,
             },
           }}
-        /> */}
+        />
         <Stack.Screen
           name="productDetail"
           component={ProductDetailScreen}
