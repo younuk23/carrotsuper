@@ -1277,6 +1277,13 @@
     react-is "^16.13.0"
     use-subscription "^1.4.0"
 
+"@react-navigation/material-top-tabs@^5.2.18":
+  version "5.2.18"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.2.18.tgz#0af1717a40307b661c24acbf0b9d7f08e4e2dd00"
+  integrity sha512-lM2VE6xd0Pq99T9Qbpi2r2UNzAXVuGud6FwcfPNllomBbvv0ZiyO/m9c7Q1t36KAUeyXIuKH15XCI9TzZDwzdA==
+  dependencies:
+    color "^3.1.2"
+
 "@react-navigation/native@^5.7.5":
   version "5.7.5"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.7.5.tgz#478579435549a1c5c9901c9c6b3c1f75fa7dbf0c"
@@ -1670,6 +1677,13 @@ babel-plugin-react-native-web@~0.13.6:
   version "0.13.14"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.13.14.tgz#043954626cdfc88d6c6ce7f72b9ea82ef122914d"
   integrity sha512-OwHMOFilnBtQxKxqobxBC6hOgomzbB1vJiuXXkOpbshb7/CmOHDEkPfb/+QRoLZ0VH4te+yaFqcAcE03U7hIWw==
+
+babel-plugin-root-import@^6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-root-import/-/babel-plugin-root-import-6.5.0.tgz#ac4016426b5d36c48127c73ad199fa72c9ff8817"
+  integrity sha512-PTD8fPl4v1kwn01u9d4rgRavDs5Z+jv4qa4/y6iYtoSgM4/xmjwMqo66j5A/BTZQEMA6OV5iFgyZ1PIhroJqqg==
+  dependencies:
+    slash "^3.0.0"
 
 "babel-plugin-styled-components@>= 1", babel-plugin-styled-components@^1.11.1:
   version "1.11.1"
@@ -4726,6 +4740,11 @@ react-native-screens@~2.10.1:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.10.1.tgz#06d22fae87ef0ce51c616c34a199726db1403b95"
   integrity sha512-Z2kKSk4AwWRQNCBmTjViuBQK0/Lx0jc25TZptn/2gKYUCOuVRvCekoA26u0Tsb3BIQ8tWDsZW14OwDlFUXW1aw==
+
+react-native-tab-view@^2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.15.1.tgz#cf4df4ffdec504263a2e06a6becd8831b9a19ad9"
+  integrity sha512-cDYl1pNWspbEHBjHrHVpIC40h4g8VhZe0CIG0CUKcouX98vHVfAojxhgWuRosq9qMhITHpLKM+7BmBLnhCJ0nw==
 
 react-native-web@~0.13.12:
   version "0.13.14"

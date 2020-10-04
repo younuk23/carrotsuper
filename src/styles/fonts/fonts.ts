@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 
 const fontSize = {
-  XXL: 20,
-  XL: 18,
-  L: 17,
-  M: 16,
-  S: 15,
-  XS: 14,
-  XXS: 13,
+  XXL: 20 as const,
+  XL: 18 as const,
+  L: 17 as const,
+  M: 16 as const,
+  S: 15 as const,
+  XS: 14 as const,
+  XXS: 13 as const,
 };
 
 const fontWeight = {
@@ -17,10 +17,10 @@ const fontWeight = {
 };
 
 const color = {
-  address: "#868E96",
-  mannerBad: "#1561a9",
-  mannerNormal: "#319E45",
-  mannerGood: "#ff8a3d",
+  address: "#868E96" as const,
+  mannerBad: "#1561a9" as const,
+  mannerNormal: "#319E45" as const,
+  mannerGood: "#ff8a3d" as const,
 };
 
 export const typo = StyleSheet.create({
