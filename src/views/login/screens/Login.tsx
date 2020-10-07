@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import Axios from "axios";
+import React, { useState } from "react";
+import axios from "axios";
 import {
   StyleSheet,
   TextInput,
@@ -8,19 +8,36 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { typo, theme } from "~/styles";
 
-export const Login: React.FunctionComponent = () => {
-  const [mobile, setMobile] = useState("");
-  const [pw, setPw] = useState("");
-  const formData = useRef({
-    mobile,
-    pw,
+export const Login: React.FunctionComponent = ({ navigation }) => {
+  const [formData, setFormData] = useState({
+    mobile: "",
+    name: "",
   });
+  const { mobile, name } = formData;
 
-  const handleSubmit = () => {
-    // axios.post({ loginData: formData.current });
+  const handleSubmit = async () => {
+    try {
+      const { data } = await axios.post("http://172.20.10.3:4000/login", {
+        ...formData,
+      });
+      const { message, token } = data;
+      message === "SUCCESS" && successLogin(token);
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const successLogin = async (token: string) => {
+    try {
+      await AsyncStorage.setItem("user", token);
+      navigation.navigate("productList");
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -29,17 +46,17 @@ export const Login: React.FunctionComponent = () => {
         <TextInput
           style={[typo.title, styles.input]}
           placeholder={"핸드폰 번호를 입력하세요"}
-          onChangeText={(text) => setMobile(text)}
+          onChangeText={(text) => setFormData({ ...formData, mobile: text })}
           defaultValue={mobile}
         />
         <TextInput
           style={[typo.title, styles.input]}
-          placeholder={"비밀번호를 입력하세요"}
-          onChangeText={(text) => setPw(text)}
-          defaultValue={pw}
+          placeholder={"이름을 입력하세요"}
+          onChangeText={(text) => setFormData({ ...formData, name: text })}
+          defaultValue={name}
         />
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <View style={{ position: "relative", right: 20 }}>
+          <View style={styles.iconWrapper}>
             <FontAwesome5 name="carrot" size={24} color={theme.orange} />
           </View>
           <Text style={typo.title}>로그인</Text>
@@ -79,5 +96,10 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 10,
     backgroundColor: theme.backgroundColor,
+  },
+
+  iconWrapper: {
+    position: "relative",
+    right: 20,
   },
 });
