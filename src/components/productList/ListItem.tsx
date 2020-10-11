@@ -1,36 +1,35 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
-import { typo } from "~/styles";
+import { typo, theme } from "~/styles";
 
 interface IProps {
-  onClick?: Function;
-  productId?: number;
-  title?: string;
-  imgUrl?: string;
+  productId: number;
+  title: string;
+  imgUrl: string;
   address?: string;
-  price?: number;
-  likeCount?: number;
+  price: number;
+  likeCount: number;
 }
 
 export const ListItem: React.FunctionComponent<IProps> = ({
-  onClick,
   productId,
-  title = "맥북팝니다. 맥북팝니다. 맥북팝니다.",
-  imgUrl = "~/images/macbook.jpeg",
-  address = "대치 4동",
-  price = 45000,
-  likeCount = 2,
+  title,
+  imgUrl,
+  address,
+  price,
+  likeCount,
 }) => {
   const { listTitle, listAddress, listLike } = typo;
+
   return (
     <TouchableOpacity style={styles.container}>
-      <Image style={styles.image} source={require("~/images/macbook.jpeg")} />
+      <Image style={styles.image} source={{ uri: imgUrl }} />
       <View style={styles.description}>
         <View>
           <Text style={[listTitle, styles.text]}>{title}</Text>
           <Text style={[listAddress, styles.text]}>{address}</Text>
-          <Text style={typo.price}>{price}</Text>
+          <Text style={typo.price}>{price.toLocaleString()}</Text>
         </View>
         <View style={styles.likeWrapper}>
           <EvilIcons name="heart" size={24} color="black" />
@@ -47,12 +46,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.borderColor,
   },
 
   image: {
     flex: 1,
-    height: "90%",
-    maxWidth: 120,
+    height: 100,
     borderRadius: 5,
     marginRight: 20,
   },

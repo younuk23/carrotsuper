@@ -5,7 +5,8 @@ import { Header } from "~/components/productList";
 import { ProductListScreen } from "~/views/productList";
 import { ProductDetailScreen } from "~/views/productDetail";
 import { Login } from "~/views/login";
-const Stack = createStackNavigator();
+
+export const Stack = createStackNavigator();
 
 export default function App() {
   return (
