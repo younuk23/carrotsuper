@@ -1,15 +1,28 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Manner, Profile } from "../";
+import Manner from "../molecular/Manner";
+import Profile from "../molecular/Profile";
 
-export function ProfileBar() {
+type User = {
+  name: string;
+  address: string;
+  manner: number;
+};
+
+interface Props {
+  User: User;
+}
+
+export const ProfileBar: React.FC<Props> = ({
+  User: { name, address, manner },
+}) => {
   return (
     <View style={styles.container}>
-      <Profile />
-      <Manner />
+      <Profile name={name} address={address} />
+      <Manner manner={manner} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -17,9 +30,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: 15,
     paddingVertical: 13,
-    borderColor: "rgba(0,0,0,0.1)",
+    borderColor: "rgba(0,0,0,0.05)",
     borderBottomWidth: 1,
   },
 });

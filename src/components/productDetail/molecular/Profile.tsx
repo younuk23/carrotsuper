@@ -1,21 +1,28 @@
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
-import { typo } from "../../../styles";
+import { typo } from "~/styles";
 
-export function Profile() {
+interface Props {
+  name: string;
+  address: string;
+}
+
+const Profile: React.FC<Props> = ({ name, address }) => {
   return (
     <View style={styles.container}>
       <View style={styles.profileImg}>
         <MaterialCommunityIcons name="face-profile" size={24} color="black" />
       </View>
       <View>
-        <Text style={typo.author}>Name</Text>
-        <Text style={typo.listAddress}>address</Text>
+        <Text style={typo.author}>{name}</Text>
+        <Text style={typo.listAddress}>{address}</Text>
       </View>
     </View>
   );
-}
+};
+
+export default Profile;
 
 const styles = StyleSheet.create({
   container: {

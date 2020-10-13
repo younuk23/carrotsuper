@@ -1,9 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { typo, theme } from "../../../styles";
+import { typo, theme } from "~/styles";
 
-export function BottomBar() {
+interface Props {
+  price: number;
+}
+
+export const BottomBar: React.FC<Props> = ({ price }) => {
   return (
     <View style={styles.topContainer}>
       <View style={styles.container}>
@@ -11,15 +15,15 @@ export function BottomBar() {
           <TouchableOpacity style={styles.heartContainer}>
             <AntDesign name="hearto" size={24} color="rgba(0,0,0,0.5)" />
           </TouchableOpacity>
-          <Text style={typo.price}>100,000원</Text>
+          <Text style={typo.price}>{price.toLocaleString()}원</Text>
         </View>
-        <View style={styles.requestContainer}>
+        <TouchableOpacity style={styles.requestContainer}>
           <Text style={typo.requestDeal}>거래요청하기!</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   topContainer: {
@@ -31,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: 10,
+    paddingHorizontal: 10,
     borderColor: "rgba(0,0,0,0.05)",
     borderTopWidth: 1,
   },

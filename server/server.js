@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const { sequelize } = require("./models/index");
 const LoginController = require("./api/login");
 const ProductController = require("./api/products");
+const UserSalesController = require("./api/userSales");
+const ProductDetailController = require("./api/productDetail");
 
 sequelize
   .sync({ force: false })
@@ -18,9 +20,13 @@ app.use(express.urlencoded({ extended: false }));
 
 const login = new LoginController();
 const product = new ProductController();
+const userSales = new UserSalesController();
+const productDetail = new ProductDetailController();
 
-app.use("/login", login.router);
-app.use("/products", product.router);
+app.use("/", login.router);
+app.use("/", product.router);
+app.use("/", userSales.router);
+app.use("/", productDetail.router);
 
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
