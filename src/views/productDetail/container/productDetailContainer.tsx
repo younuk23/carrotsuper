@@ -1,25 +1,32 @@
 import React, { useEffect } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { useGetDetailData, useGetUserSales } from "~/hooks/useGetData";
 import { ProductDetailScreen } from "../screens/ProductDetailScreen";
 import { fetchDetailData, fetchUserSales } from "~/modules/productDetail/thunk";
 
 export function ProductDetailContainer({ route, navigation }: any) {
   const dispatch = useDispatch();
-  const { userSales, detailData } = useSelector(
-    ({ productDetail: { userSales, detailData } }: any) => ({
-      userSales: userSales,
-      detailData: detailData,
-    })
-  );
+  const userSales = useGetUserSales();
+  const detailData = useGetDetailData();
+
+  console.log(detailData);
   useEffect(() => {
     setDetailData();
   }, []);
 
   const setDetailData = () => {
-    dispatch(fetchDetailData(route.params?.id || 1));
+    dispatch(fetchDetailData(route.params.id));
   };
 
-  if (Object.keys(detailData).length < 1) return <View />;
+  if (Object.keys(detailData).length < 1) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>요청에 실패했습니다. 재접속 해주세요</Text>
+      </View>
+    );
+  }
+
+  console.log(detailData);
   return <ProductDetailScreen navigation={navigation} />;
 }

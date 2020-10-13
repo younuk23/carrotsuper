@@ -4,7 +4,7 @@ import { getUserSales, getDetailData } from "./productDetail";
 const LIMIT = 10;
 const API = `192.168.1.23`;
 
-export const fetchUserSales = (userId: number) => {
+export const fetchUserSales = (userId: number = 1) => {
   return async (dispatch: any) => {
     try {
       const productData = await axios.get(
@@ -18,7 +18,7 @@ export const fetchUserSales = (userId: number) => {
 };
 
 //store type은 추후 적용 예정
-export const addFetchData = (offset: number) => async (
+export const addFetchData = (offset: number = 10) => async (
   dispatch: any,
   getState: () => { productDetail: any }
 ) => {
@@ -27,7 +27,7 @@ export const addFetchData = (offset: number) => async (
   } = getState();
   try {
     const productData = await axios.post(`http://${API}:4000`, {
-      offset: offset || 10,
+      offset: offset,
       limit: LIMIT,
     });
     dispatch(getUserSales([...userSales, ...productData.data.productDetail]));
@@ -36,7 +36,7 @@ export const addFetchData = (offset: number) => async (
   }
 };
 
-export const fetchDetailData = (id: number) => async (dispatch: any) => {
+export const fetchDetailData = (id: number = 1) => async (dispatch: any) => {
   try {
     const productData = await axios.get(`http://${API}:4000/product/${id}`);
     console.log("axios data = ", productData);

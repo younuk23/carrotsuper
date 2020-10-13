@@ -13,6 +13,7 @@ import ReduxThunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "~/modules";
 import { Provider } from "react-redux";
+import { BottomTap } from "~/components/common";
 
 const Stack = createStackNavigator();
 const sagaMiddleware = createSagaMiddleware();
@@ -29,7 +30,7 @@ export default function App() {
           <Stack.Screen name="login" component={Login} />
           <Stack.Screen
             name="productList"
-            component={ProductListScreen}
+            component={BottomTap}
             options={{
               headerTitle: () => <Header location="서울시 강남구" />,
               // 추후 백엔드 데이터와 redux로 연동해서 location부분 선택기능 추가할 예정

@@ -8,9 +8,20 @@ import TradingItems from "../screens/TradingItems";
 import TradedItems from "../screens/TradedItems";
 import { typo, theme } from "~/styles";
 
-export function MoreUserItemsContainer({ navigation }: any) {
-  const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
+export function MoreUserItemsContainer({ navigation }: any) {
+  const callTotalUserSales = () => {
+    return <TotalUserSales navigation={navigation} />;
+  };
+
+  const callTradingItems = () => {
+    return <TradingItems navigation={navigation} />;
+  };
+
+  const callTradedItems = () => {
+    return <TradedItems />;
+  };
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="auto" />
@@ -31,17 +42,17 @@ export function MoreUserItemsContainer({ navigation }: any) {
       >
         <Tab.Screen
           name="TotalUserSales"
-          component={TotalUserSales}
+          component={callTotalUserSales}
           options={{ tabBarLabel: "전체" }}
         />
         <Tab.Screen
           name="TradingItems"
-          component={TradingItems}
+          component={callTradingItems}
           options={{ tabBarLabel: "거래중" }}
         />
         <Tab.Screen
           name="TradedItems"
-          component={TradedItems}
+          component={callTradedItems}
           options={{ tabBarLabel: "거래완료" }}
         />
       </Tab.Navigator>
