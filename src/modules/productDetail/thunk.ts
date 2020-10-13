@@ -39,7 +39,6 @@ export const addFetchData = (offset: number = 10) => async (
 export const fetchDetailData = (id: number = 1) => async (dispatch: any) => {
   try {
     const productData = await axios.get(`http://${API}:4000/product/${id}`);
-    console.log("axios data = ", productData);
     dispatch(getDetailData(productData.data.productDetail));
   } catch (e) {
     console.error("ERROR!!!", e);

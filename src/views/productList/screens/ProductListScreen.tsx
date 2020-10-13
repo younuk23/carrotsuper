@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SecondHandTransactionScreen } from "./SecondHandTransactionScreen";
 import { VillageLifeScreen } from "./VillageLifeScreen";
 import { typo, theme } from "~/styles";
-import { BottomTap } from "~/components/common/BottomTap";
+import { Header } from "~/components/productList";
+import { StatusBar } from "expo-status-bar";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -14,7 +15,11 @@ export const ProductListScreen = ({ navigation }: any) => {
   };
 
   return (
-    <>
+    <View style={{ flex: 1 }}>
+      <StatusBar style="auto" />
+      <View style={{ flexDirection: "row" }}>
+        <Header location="서울시 강남구" />
+      </View>
       <Tab.Navigator
         initialRouteName="secondHandTransaction"
         tabBarOptions={{
@@ -38,6 +43,6 @@ export const ProductListScreen = ({ navigation }: any) => {
           options={{ tabBarLabel: "동네생활" }}
         />
       </Tab.Navigator>
-    </>
+    </View>
   );
 };
