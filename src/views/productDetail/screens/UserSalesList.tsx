@@ -9,11 +9,11 @@ interface Props {
   navigation: any;
 }
 interface Item {
-  Product_images: any;
+  product_images: any;
   title: string;
   price: string;
   id: number;
-  User: { name: string };
+  user: { name: string };
 }
 
 interface UserItemList {
@@ -33,12 +33,12 @@ export default function UserSalesList({ data, navigation }: Props) {
   };
 
   const renderItem = ({
-    item: { Product_images, title, price, id },
+    item: { product_images, title, price, id },
   }: UserItemList) => {
     return (
       <TouchableOpacity onPress={() => goToProductDetail(id)}>
         <UserSaleItem
-          imgSource={Product_images[0].image_url}
+          imgSource={product_images[0].image_url}
           title={title}
           price={`${price.toLocaleString()}원`}
         />
@@ -50,7 +50,7 @@ export default function UserSalesList({ data, navigation }: Props) {
     <View>
       <View style={styles.topBar}>
         <Text style={[typo.tabTitle, { fontWeight: "600" }]}>
-          {data[0]?.User.name}님의 판매 상품
+          {data[0]?.user.name}님의 판매 상품
         </Text>
         <TouchableOpacity onPress={goToMore}>
           <Text style={styles.showMore}>더보기</Text>

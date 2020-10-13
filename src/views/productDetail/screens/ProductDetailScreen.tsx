@@ -19,26 +19,27 @@ export const ProductDetailScreen: React.FC<PropsItem> = ({ navigation }) => {
   const detailData = useGetDetailData();
 
   const {
-    Product_images,
+    product_images,
     title,
     price,
     description,
     view,
     like_count,
-    Category,
+    category,
     user_id,
-    User,
+    user,
   } = detailData;
 
   useEffect(() => {
+    console.log(detailData);
     setUserSales(user_id);
   }, []);
 
   const setUserSales = (userId: number) => {
-    dispatch(fetchUserSales(user_id || 1));
+    dispatch(fetchUserSales(user_id));
   };
 
-  const newImgSrc = Product_images.map((item: { image_url: string }) => {
+  const newImgSrc = product_images?.map((item: { image_url: string }) => {
     return item.image_url;
   });
 
@@ -56,11 +57,11 @@ export const ProductDetailScreen: React.FC<PropsItem> = ({ navigation }) => {
           loop
         />
         <View style={styles.container}>
-          <ProfileBar User={User} />
+          <ProfileBar User={user} />
           <MainContent
             title={title}
             description={description}
-            category={Category.name || "기타중고상품"}
+            category={category.name}
             view={view}
             likeCount={like_count}
           />

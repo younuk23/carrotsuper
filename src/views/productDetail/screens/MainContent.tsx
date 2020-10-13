@@ -13,7 +13,7 @@ interface Props {
 
 const MainContent: React.FC<Props> = ({
   title,
-  category,
+  category = "기타중고상품",
   description,
   view,
   likeCount,

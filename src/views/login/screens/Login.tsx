@@ -12,7 +12,9 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { typo, theme } from "~/styles";
 
-export const Login: React.FunctionComponent = ({ navigation }) => {
+const API = `192.168.1.23`;
+
+export const Login: React.FunctionComponent = ({ navigation }: any) => {
   const [formData, setFormData] = useState({
     mobile: "",
     name: "",
@@ -21,7 +23,7 @@ export const Login: React.FunctionComponent = ({ navigation }) => {
 
   const handleSubmit = async () => {
     try {
-      const { data } = await axios.post("http://172.20.10.3:4000/login", {
+      const { data } = await axios.post(`http://${API}:4000/login`, {
         ...formData,
       });
       const { message, token } = data;
