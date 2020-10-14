@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import {
   StyleSheet,
   TextInput,
@@ -7,40 +6,27 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Text,
+  GestureResponderEvent,
 } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { typo, theme } from "~/styles";
 
-const API = `192.168.1.23`;
+interface IProps {
+  navigation: any;
+  formData: {
+    mobile: string;
+    name: string;
+  };
+  handleChange: Function;
+  handleSubmit: (event: GestureResponderEvent) => void;
+}
 
-export const Login: React.FunctionComponent = ({ navigation }: any) => {
-  const [formData, setFormData] = useState({
-    mobile: "",
-    name: "",
-  });
+export const Login: React.FunctionComponent<IProps> = ({
+  formData,
+  handleChange,
+  handleSubmit,
+}) => {
   const { mobile, name } = formData;
-
-  const handleSubmit = async () => {
-    try {
-      const { data } = await axios.post(`http://${API}:4000/login`, {
-        ...formData,
-      });
-      const { message, token } = data;
-      message === "SUCCESS" && successLogin(token);
-    } catch (err) {
-      alert(err);
-    }
-  };
-
-  const successLogin = async (token: string) => {
-    try {
-      await AsyncStorage.setItem("user", token);
-      navigation.navigate("productList");
-    } catch (err) {
-      alert(err);
-    }
-  };
 
   return (
     <SafeAreaView style={styles.view}>
@@ -48,13 +34,17 @@ export const Login: React.FunctionComponent = ({ navigation }: any) => {
         <TextInput
           style={[typo.title, styles.input]}
           placeholder={"핸드폰 번호를 입력하세요"}
-          onChangeText={(text) => setFormData({ ...formData, mobile: text })}
+          onChangeText={(text) => {
+            handleChange(text, "mobile");
+          }}
           defaultValue={mobile}
         />
         <TextInput
           style={[typo.title, styles.input]}
           placeholder={"이름을 입력하세요"}
-          onChangeText={(text) => setFormData({ ...formData, name: text })}
+          onChangeText={(text) => {
+            handleChange(text, "name");
+          }}
           defaultValue={name}
         />
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>

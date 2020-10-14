@@ -1,12 +1,13 @@
-const express = require("express");
-const ProductService = require("../service/products.service");
+import { Router, Request, Response } from "express";
+import ProductListService from "./productlist.service";
 
-class ProductController {
-  router = express.Router();
-  path = "/products";
+class ProductListController {
+  public router = Router();
+  public path = "/productlist";
+  public service: ProductListService;
 
   constructor() {
-    this.service = new ProductService();
+    this.service = new ProductListService();
     this.initializeRoutes();
   }
 
@@ -14,7 +15,7 @@ class ProductController {
     this.router.post(`${this.path}`, this.sendProductList);
   }
 
-  sendProductList = async (req, res) => {
+  sendProductList = async (req: Request, res: Response) => {
     const { offset, limit } = req.body;
     const productList = await this.service.getProductList(offset, limit);
     if (!productList) {
@@ -26,4 +27,4 @@ class ProductController {
   };
 }
 
-module.exports = ProductController;
+export { ProductListController };

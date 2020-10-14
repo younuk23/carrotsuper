@@ -1,7 +1,7 @@
-const { products, product_images, categories, users } = require("../models");
+const { products, product_images, categories, users } = require("../../models");
 
 class ProductDetailService {
-  getProductDetail = async (id = 1) => {
+  getProductDetail = async (id = "1") => {
     const product = await products.findOne({
       attributes: [
         `id`,
@@ -31,4 +31,4 @@ class ProductDetailService {
   };
 }
 
-module.exports = ProductDetailService;
+export default ProductDetailService;

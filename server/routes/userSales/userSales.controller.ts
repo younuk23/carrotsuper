@@ -1,9 +1,10 @@
-const express = require("express");
-const UserSalesService = require("../service/userSales.service");
+import { Router, Request, Response } from "express";
+import UserSalesService from "./userSales.service";
 
 class UserSalesController {
-  router = express.Router();
-  path = "/products";
+  public router = Router();
+  public path = "/products";
+  public service: UserSalesService;
 
   constructor() {
     this.service = new UserSalesService();
@@ -14,7 +15,7 @@ class UserSalesController {
     this.router.get(`${this.path}/:userId`, this.sendProductList);
   }
 
-  sendProductList = async (req, res) => {
+  sendProductList = async (req: Request, res: Response) => {
     const { userId } = req.params;
     const productDetail = await this.service.getProducts(userId);
     if (!productDetail) {
@@ -26,4 +27,4 @@ class UserSalesController {
   };
 }
 
-module.exports = UserSalesController;
+export { UserSalesController };

@@ -5,7 +5,7 @@ import {
   ProductDetailContainer,
   MoreUserItemsContainer,
 } from "~/views/productDetail";
-import { Login } from "~/views/login";
+import { LoginContainer } from "~/views/login";
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
@@ -26,7 +26,7 @@ export default function App() {
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator initialRouteName="login">
-          <Stack.Screen name="login" component={Login} />
+          <Stack.Screen name="login" component={LoginContainer} />
           <Stack.Screen
             name="productList"
             component={BottomTap}
