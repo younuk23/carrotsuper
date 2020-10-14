@@ -8,7 +8,11 @@ import { theme } from "~/styles";
 
 const Tab = createBottomTabNavigator();
 
-export const BottomTap = () => {
+export const BottomTap = ({ navigation }: any) => {
+  const callPostPage = () => {
+    return <PostPageContainer navigation={navigation} />;
+  };
+
   return (
     <Tab.Navigator
       initialRouteName="ProductList"
@@ -18,7 +22,7 @@ export const BottomTap = () => {
         name="ProductList"
         component={ProductListScreen}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "홈",
           tabBarIcon: ({ color, size }) => (
             <SimpleLineIcons name="home" size={size} color={color} />
           ),
@@ -26,9 +30,9 @@ export const BottomTap = () => {
       />
       <Tab.Screen
         name="PostPage"
-        component={PostPageContainer}
+        component={callPostPage}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "글쓰기",
           tabBarIcon: ({ color, size }) => (
             <SimpleLineIcons name="pencil" size={size} color={color} />
           ),
@@ -38,7 +42,7 @@ export const BottomTap = () => {
         name="UserManagement"
         component={UserManagementContainer}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "나의 당근",
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="user-o" size={size} color={color} />
           ),

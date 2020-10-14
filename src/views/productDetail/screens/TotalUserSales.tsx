@@ -31,7 +31,6 @@ export default function TotalUserSales({ navigation }: any) {
     return (
       <TouchableOpacity
         onPress={() => {
-          console.log("hello");
           navigation.push("productDetail", {
             id: id,
           });

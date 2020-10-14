@@ -31,7 +31,6 @@ export const ProductDetailScreen: React.FC<PropsItem> = ({ navigation }) => {
   } = detailData;
 
   useEffect(() => {
-    console.log(detailData);
     setUserSales(user_id);
   }, []);
 

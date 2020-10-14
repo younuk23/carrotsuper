@@ -26,7 +26,6 @@ export default function UserSalesList({ data, navigation }: Props) {
   };
 
   const goToProductDetail = (id: number) => {
-    console.log(id);
     navigation.push("productDetail", {
       id: id,
     });

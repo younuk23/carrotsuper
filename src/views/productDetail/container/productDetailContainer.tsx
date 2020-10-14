@@ -10,7 +10,6 @@ export function ProductDetailContainer({ route, navigation }: any) {
   const userSales = useGetUserSales();
   const detailData = useGetDetailData();
 
-  console.log(detailData);
   useEffect(() => {
     setDetailData();
   }, []);
@@ -27,6 +26,5 @@ export function ProductDetailContainer({ route, navigation }: any) {
     );
   }
 
-  console.log(detailData);
   return <ProductDetailScreen navigation={navigation} />;
 }

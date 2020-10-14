@@ -1,8 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Header } from "~/components/productList";
-import { ProductListScreen } from "~/views/productList";
 import {
   ProductDetailContainer,
   MoreUserItemsContainer,
@@ -14,6 +12,7 @@ import createSagaMiddleware from "redux-saga";
 import rootReducer from "~/modules";
 import { Provider } from "react-redux";
 import { BottomTap } from "~/components/common";
+import { CameraScreen } from "~/views/postPage";
 
 const Stack = createStackNavigator();
 const sagaMiddleware = createSagaMiddleware();
@@ -31,13 +30,7 @@ export default function App() {
           <Stack.Screen
             name="productList"
             component={BottomTap}
-            options={{
-              headerTitle: () => <Header location="서울시 강남구" />,
-              // 추후 백엔드 데이터와 redux로 연동해서 location부분 선택기능 추가할 예정
-              headerTitleContainerStyle: {
-                flex: 1,
-              },
-            }}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="productDetail"
@@ -49,6 +42,7 @@ export default function App() {
             component={MoreUserItemsContainer}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="Camera" component={CameraScreen} />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
