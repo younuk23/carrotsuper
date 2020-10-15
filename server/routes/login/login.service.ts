@@ -1,9 +1,13 @@
-const { users } = require("../models");
+const { users } = require("../../models");
+import JWT_SECRET_KEY from "../../config/jwt.config";
 const jwt = require("jsonwebtoken");
-const JWT_SECRET_KEY = require("../config/jwt.config");
+import { IUser } from "./login.interface";
 
 class LoginService {
-  getUserData = async (phoneNumber, name) => {
+  getUserData = async (
+    phoneNumber: string,
+    name: string
+  ): Promise<IUser | undefined> => {
     try {
       const user = await users.findOne({
         attributes: ["id", "phone_number", "name"],
@@ -15,9 +19,9 @@ class LoginService {
     }
   };
 
-  getToken = (user) => {
+  getToken = (user: IUser): string => {
     return jwt.sign({ user_id: user.id }, JWT_SECRET_KEY);
   };
 }
 
-module.exports = LoginService;
+export default LoginService;

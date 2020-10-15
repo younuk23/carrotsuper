@@ -1,9 +1,10 @@
-const express = require("express");
-const LoginService = require("../service/login.service");
+import { Request, Response, Router } from "express";
+import LoginService from "./login.service";
 
 class LoginController {
-  router = express.Router();
-  path = "/login";
+  public path = "/login" as const;
+  public router = Router();
+  public service: LoginService;
 
   constructor() {
     this.service = new LoginService();
@@ -14,11 +15,11 @@ class LoginController {
     this.router.post(`${this.path}`, this.login);
   }
 
-  login = async (req, res) => {
+  login = async (req: Request, res: Response) => {
     const { mobile, name } = req.body;
     const user = await this.service.getUserData(mobile, name);
     if (!user) {
-      return res.json(400, {
+      return res.status(401).json({
         message: "this user is not exist",
       });
     }
@@ -30,4 +31,4 @@ class LoginController {
   };
 }
 
-module.exports = LoginController;
+export { LoginController };

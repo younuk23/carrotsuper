@@ -1,7 +1,7 @@
-const { products, product_images, categories, users } = require("../models");
+const { products, product_images, categories, users } = require("../../models");
 
 class UserSalesService {
-  getProducts = async (userId = 1) => {
+  getProducts = async (userId = "1") => {
     const productList = await products.findAll({
       attributes: [`id`, `title`, `price`, `user_id`, `view`, `like_count`],
       where: {
@@ -24,4 +24,4 @@ class UserSalesService {
   };
 }
 
-module.exports = UserSalesService;
+export default UserSalesService;

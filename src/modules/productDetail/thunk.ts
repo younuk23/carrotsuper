@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUserSales, getDetailData } from "./productDetail";
 
 const LIMIT = 10;
-const API = `192.168.1.23`;
+const API = `172.20.10.3`;
 
 export const fetchUserSales = (userId: number = 1) => {
   return async (dispatch: any) => {

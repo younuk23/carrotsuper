@@ -1,7 +1,8 @@
-const { products, product_images, categories, users } = require("../models");
+const { products, product_images, categories, users } = require("../../models");
+import { IProductList } from "./productlist.interface";
 
-class ProductService {
-  getProductList = async (offset = 0, limit = 10) => {
+class ProductListService {
+  getProductList = async (offset = 0, limit = 10): Promise<IProductList> => {
     const productList = await products.findAll({
       attributes: [`id`, `title`, `price`, `view`, `like_count`],
       include: [
@@ -23,4 +24,4 @@ class ProductService {
   };
 }
 
-module.exports = ProductService;
+export default ProductListService;
