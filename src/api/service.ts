@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AxiosResponse, AxiosError, AxiosPromise } from "axios";
 
-const BASE_URL = "http://172.20.10.3:4000";
+const BASE_URL = "http://10.58.0.43:4000";
 
 const onSuccess = (res: AxiosResponse) => {
   return res.data;
