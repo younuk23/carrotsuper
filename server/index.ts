@@ -1,10 +1,12 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as morgan from "morgan";
-import { LoginController } from "./routes/login";
-import { ProductListController } from "./routes/productlist";
-import { ProductDetailController } from "./routes/productDetail";
-import { UserSalesController } from "./routes/userSales";
+import {
+  LoginController,
+  ProductListController,
+  ProductDetailController,
+  UserSalesController,
+} from "./routes";
 
 interface IControllers {
   login: LoginController;

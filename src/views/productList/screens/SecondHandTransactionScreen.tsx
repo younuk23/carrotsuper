@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, FlatList, Text } from "react-native";
 import { ListItem } from "~/components/productList";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import {
-  IProductItem,
-  IProductList,
-} from "../../../../server/routes/productlist";
+import { IProductItem, IProductList } from "../../../../server/routes";
 import { requestProductList } from "~/api/productList";
 
 export const SecondHandTransactionScreen = ({ navigation }: any) => {
