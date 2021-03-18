@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, Text, View, FlatList } from "react-native";
 import { ListItem } from "~/components/productList/";
-import { addFetchData } from "~/modules/productDetail/thunk";
+import { dispatchFetchData } from "~/modules/productDetail/thunk";
 import { useGetUserSales } from "~/hooks/useGetData";
 
 const LIMIT = 10;
@@ -20,7 +20,7 @@ export default function TradingItems({ navigation }: any) {
   const [offset, setOffset] = useState(10);
 
   useEffect(() => {
-    addFetchData(offset);
+    dispatchFetchData(offset);
   }, [offset]);
   // 추후 offset을 쓸 경우 코드 추가 예정
 
