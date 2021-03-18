@@ -3,7 +3,7 @@ import UserSalesService from "./userSales.service";
 
 class UserSalesController {
   public router = Router();
-  public path = "/users";
+  public path = "/products";
   public service: UserSalesService;
 
   constructor() {

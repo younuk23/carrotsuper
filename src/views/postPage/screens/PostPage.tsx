@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { StyleSheet, Text, View, ScrollView, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
@@ -6,89 +6,69 @@ import {
   MaterialIcons,
   FontAwesome5,
 } from "@expo/vector-icons";
-import BottomSheet from "reanimated-bottom-sheet";
 import { StatusBar } from "expo-status-bar";
 import { theme } from "~/styles";
 import { FormRow } from "~/components/postPage";
 import { SafeHead } from "~/components/common";
-import BottomSheetScreen from "./BottomSheetScreen";
 
 export const PostPage = ({ navigation }: any) => {
   const address = "돈암제1동"; //추후 로그인시 주소받아 리덕스 스토어에 저장 예정
-  const sheetRef = useRef<BottomSheet>(null);
 
-  const renderContent = () => {
-    return <BottomSheetScreen navigation={navigation} />;
+  const goToCamera = () => {
+    navigation.navigate("Camera");
   };
-
   return (
-    <>
-      <View style={styles.container}>
-        <SafeHead title="중고거래 글쓰기" />
-        <ScrollView style={styles.scrollContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              if (sheetRef.current !== null) {
-                sheetRef.current?.snapTo(0);
-              }
-            }}
-          >
-            <View style={styles.cameraContainer}>
-              <View style={styles.cameraIconContainer}>
-                <MaterialCommunityIcons
-                  name="camera"
-                  size={24}
-                  color="rgba(0,0,0,0.4)"
-                />
-                <Text style={styles.cameraText}>0/10</Text>
-              </View>
+    <View style={styles.container}>
+      <SafeHead title="중고거래 글쓰기" />
+      <ScrollView style={styles.scrollContainer}>
+        <TouchableOpacity onPress={goToCamera}>
+          <View style={styles.cameraContainer}>
+            <View style={styles.cameraIconContainer}>
+              <MaterialCommunityIcons
+                name="camera"
+                size={24}
+                color="rgba(0,0,0,0.4)"
+              />
+              <Text style={styles.cameraText}>0/10</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+        <FormRow>
+          <TextInput style={styles.postTitle} placeholder="글 제목" />
+        </FormRow>
+        <FormRow>
+          <TouchableOpacity>
+            <View style={styles.categoryBox}>
+              <Text style={styles.postTitle}>카테고리 선택</Text>
+              <MaterialIcons name="navigate-next" size={20} color="black" />
             </View>
           </TouchableOpacity>
-          <FormRow>
-            <TextInput style={styles.postTitle} placeholder="글 제목" />
-          </FormRow>
-          <FormRow>
-            <TouchableOpacity>
-              <View style={styles.categoryBox}>
-                <Text style={styles.postTitle}>카테고리 선택</Text>
-                <MaterialIcons name="navigate-next" size={20} color="black" />
-              </View>
-            </TouchableOpacity>
-          </FormRow>
-          <FormRow>
-            <TextInput
-              style={styles.postTitle}
-              placeholder="₩ 가격 입력(선택사항)"
-            />
-          </FormRow>
-          <View>
-            <TextInput
-              multiline
-              maxLength={500}
-              style={styles.description}
-              placeholder={`${address}${DESCRIPTION}`}
-            />
-          </View>
-          <View style={styles.submitContainer}>
-            <TouchableOpacity>
-              <View style={styles.submitBtn}>
-                <Text style={{ fontSize: 20, color: "white" }}>당근</Text>
-                <FontAwesome5 name="carrot" size={24} color="white" />
-              </View>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-        <StatusBar style="auto" />
-      </View>
-      <BottomSheet
-        ref={sheetRef}
-        initialSnap={2}
-        snapPoints={[200, 100, 0]}
-        renderContent={renderContent}
-        enabledContentTapInteraction={false}
-        enabledBottomInitialAnimation
-      />
-    </>
+        </FormRow>
+        <FormRow>
+          <TextInput
+            style={styles.postTitle}
+            placeholder="₩ 가격 입력(선택사항)"
+          />
+        </FormRow>
+        <View>
+          <TextInput
+            multiline
+            maxLength={500}
+            style={styles.description}
+            placeholder={`${address}${DESCRIPTION}`}
+          />
+        </View>
+        <View style={styles.submitContainer}>
+          <TouchableOpacity>
+            <View style={styles.submitBtn}>
+              <Text style={{ fontSize: 20, color: "white" }}>당근</Text>
+              <FontAwesome5 name="carrot" size={24} color="white" />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+      <StatusBar style="auto" />
+    </View>
   );
 };
 
