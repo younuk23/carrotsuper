@@ -20,7 +20,7 @@ class LoginService {
   };
 
   getToken = (user: IUser): string => {
-    return jwt.sign({ userId: user.id }, JWT_SECRET_KEY);
+    return jwt.sign({ user_id: user.id }, JWT_SECRET_KEY);
   };
 }
 

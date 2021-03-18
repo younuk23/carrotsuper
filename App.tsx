@@ -12,7 +12,7 @@ import createSagaMiddleware from "redux-saga";
 import rootReducer from "~/modules";
 import { Provider } from "react-redux";
 import { BottomTap } from "~/components/common";
-import { CameraScreen, ImagePickerScreen } from "~/views/postPage";
+import { CameraScreen } from "~/views/postPage";
 
 const Stack = createStackNavigator();
 const sagaMiddleware = createSagaMiddleware();
@@ -43,7 +43,6 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Camera" component={CameraScreen} />
-          <Stack.Screen name="Album" component={ImagePickerScreen} />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

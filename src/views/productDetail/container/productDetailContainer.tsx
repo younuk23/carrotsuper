@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetDetailData, useGetUserSales } from "~/hooks/useGetData";
 import { ProductDetailScreen } from "../screens/ProductDetailScreen";
-import {
-  dispatchDetailData,
-  dispatchUserSales,
-} from "~/modules/productDetail/thunk";
+import { fetchDetailData, fetchUserSales } from "~/modules/productDetail/thunk";
 
-export const ProductDetailContainer = ({ route, navigation }: any) => {
+export function ProductDetailContainer({ route, navigation }: any) {
   const dispatch = useDispatch();
   const userSales = useGetUserSales();
   const detailData = useGetDetailData();
@@ -18,7 +15,7 @@ export const ProductDetailContainer = ({ route, navigation }: any) => {
   }, []);
 
   const setDetailData = () => {
-    dispatch(dispatchDetailData(route.params.id));
+    dispatch(fetchDetailData(route.params.id));
   };
 
   if (Object.keys(detailData).length < 1) {
@@ -30,4 +27,4 @@ export const ProductDetailContainer = ({ route, navigation }: any) => {
   }
 
   return <ProductDetailScreen navigation={navigation} />;
-};
+}

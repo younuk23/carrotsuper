@@ -1,19 +1,16 @@
 const { products, product_images, categories, users } = require("../../models");
-import { IProductDetail } from "./productDetail.interface";
 
 class ProductDetailService {
-  getProductDetail = async (
-    id: string | number = "1"
-  ): Promise<IProductDetail> => {
+  getProductDetail = async (id = "1") => {
     const product = await products.findOne({
       attributes: [
         `id`,
         `title`,
         `price`,
-        `view`,
-        `like_count`,
         `user_id`,
         `description`,
+        `view`,
+        `like_count`,
       ],
       where: {
         id: Number(id),
