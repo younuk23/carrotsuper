@@ -1,7 +1,8 @@
 const { products, product_images, categories, users } = require("../../models");
+import { IUserSales } from "./userSales.interface";
 
 class UserSalesService {
-  getProducts = async (userId = "1") => {
+  getProducts = async (userId: string | number = "1"): Promise<IUserSales> => {
     const productList = await products.findAll({
       attributes: [`id`, `title`, `price`, `user_id`, `view`, `like_count`],
       where: {

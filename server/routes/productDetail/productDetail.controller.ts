@@ -3,7 +3,7 @@ import ProductDetailService from "./productDetail.service";
 
 class ProductDetailController {
   public router = Router();
-  public path = "/product";
+  public path = "/products";
   public service: ProductDetailService;
 
   constructor() {

@@ -1,8 +1,10 @@
 import App from "./index";
-import { LoginController } from "./routes/login";
-import { ProductListController } from "./routes/productlist";
-import { ProductDetailController } from "./routes/productDetail";
-import { UserSalesController } from "./routes/userSales";
+import {
+  LoginController,
+  ProductListController,
+  ProductDetailController,
+  UserSalesController,
+} from "./routes";
 
 const app = new App(
   {

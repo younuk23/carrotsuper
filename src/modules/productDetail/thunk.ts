@@ -1,16 +1,16 @@
 import axios from "axios";
 import { getUserSales, getDetailData } from "./productDetail";
+import {
+  fetchUserSales,
+  addFetchData,
+  fetchDetailData,
+} from "~/api/productDetail";
 
-const LIMIT = 10;
-const API = `172.20.10.3`;
-
-export const fetchUserSales = (userId: number = 1) => {
+export const dispatchUserSales = (userId: number = 1) => {
   return async (dispatch: any) => {
     try {
-      const productData = await axios.get(
-        `http://${API}:4000/products/${userId}`
-      );
-      dispatch(getUserSales(productData.data.productDetail));
+      const productData = await fetchUserSales(userId);
+      dispatch(getUserSales(productData.productDetail));
     } catch (e) {
       console.error("ERROR!!!", e);
     }
@@ -18,7 +18,7 @@ export const fetchUserSales = (userId: number = 1) => {
 };
 
 //store type은 추후 적용 예정
-export const addFetchData = (offset: number = 10) => async (
+export const dispatchFetchData = (offset: number = 10) => async (
   dispatch: any,
   getState: () => { productDetail: any }
 ) => {
@@ -26,20 +26,17 @@ export const addFetchData = (offset: number = 10) => async (
     productDetail: { userSales },
   } = getState();
   try {
-    const productData = await axios.post(`http://${API}:4000`, {
-      offset: offset,
-      limit: LIMIT,
-    });
-    dispatch(getUserSales([...userSales, ...productData.data.productDetail]));
+    const productData = await addFetchData(offset);
+    dispatch(getUserSales([...userSales, ...productData.productDetail]));
   } catch (e) {
     console.error("ERROR!!!", e);
   }
 };
 
-export const fetchDetailData = (id: number = 1) => async (dispatch: any) => {
+export const dispatchDetailData = (id: number = 1) => async (dispatch: any) => {
   try {
-    const productData = await axios.get(`http://${API}:4000/product/${id}`);
-    dispatch(getDetailData(productData.data.productDetail));
+    const productData = await fetchDetailData(id);
+    dispatch(getDetailData(productData.productDetail));
   } catch (e) {
     console.error("ERROR!!!", e);
   }

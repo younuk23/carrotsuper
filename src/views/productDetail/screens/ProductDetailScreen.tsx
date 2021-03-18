@@ -4,7 +4,7 @@ import { ScrollView, View, StyleSheet } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import { useDispatch } from "react-redux";
 import { ProfileBar, BottomBar, TopBar } from "~/components/productDetail";
-import { fetchUserSales } from "~/modules/productDetail/thunk";
+import { dispatchUserSales } from "~/modules/productDetail/thunk";
 import { useGetDetailData, useGetUserSales } from "~/hooks/useGetData";
 import MainContent from "./MainContent";
 import UserSalesList from "./UserSalesList";
@@ -35,7 +35,7 @@ export const ProductDetailScreen: React.FC<PropsItem> = ({ navigation }) => {
   }, []);
 
   const setUserSales = (userId: number) => {
-    dispatch(fetchUserSales(user_id));
+    dispatch(dispatchUserSales(user_id));
   };
 
   const newImgSrc = product_images?.map((item: { image_url: string }) => {

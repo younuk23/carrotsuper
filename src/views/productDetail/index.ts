@@ -1,4 +1,6 @@
+//screen
 export * from "./screens/ProductDetailScreen";
 
-export * from "./container/ProductDetailContainer";
+//container
 export * from "./container/MoreUserItemsContainer";
+export * from "./container/ProductDetailContainer";
